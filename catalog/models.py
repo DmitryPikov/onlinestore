@@ -14,7 +14,7 @@ class Category(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=50, verbose_name='Наименование')
     description = models.TextField(max_length=500, verbose_name='Описание')
-    photo = models.ImageField(upload_to='photos/', verbose_name='Изображение', blank=True, null=True)
+    photo = models.ImageField(upload_to='photo/', verbose_name='Изображение', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория')
     price = models.IntegerField(verbose_name='Цена за покупку')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
