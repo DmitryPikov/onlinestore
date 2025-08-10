@@ -1,0 +1,22 @@
+{% extends 'catalog/home.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    <div class="col-12">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                {% with article=object %}
+                <h4 class="my-0 font-weight-normal">{{ article.name }}</h4>
+            </div>
+            <div class="card-body">
+                <img src="{{ article.photo|media_filter }}" class="img-fluid" style="width: 20%; height: auto; object-fit: cover;">
+                <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                    <p>{{ article.description }}</p>
+                </ul>
+                {% endwith %}
+                <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'blog:article_list' %}">Назад</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
