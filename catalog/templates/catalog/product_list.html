@@ -16,7 +16,11 @@
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <p>{{ product.description|truncatechars:100 }}</p>
                     </ul>
-                    <a type="button" class="btn btn-lg btn-block btn-outline-primary" href="{% url 'catalog:product_detail' product.pk %}">Посмотреть</a>
+                    <div class="d-flex flex-column gap-2">
+                        <a type="button" class="btn btn-sm btn-outline-primary" href="{% url 'catalog:product_detail' product.pk %}">Посмотреть</a>
+                        <a type="button" class="btn btn-sm btn-outline-primary" href="{% url 'catalog:product_update' product.pk %}">Редактировать</a>
+                        <a type="button" class="btn btn-sm btn-danger" href="{% url 'catalog:product_delete' product.pk %}">Удалить</a>
+                    </div>
                 </div>
             </div>
         </div>
