@@ -1,0 +1,28 @@
+{% extends 'blog/home.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row text-center">
+    {% for article in object_list %}
+        <div class="col-4">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ article.name }}</h4>
+                </div>
+                <div class="card-body">
+                    {% if article.photo %}
+                        <img src="{{ article.photo | media_filter }}" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+                    {% endif %}
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <p>{{ article.description|truncatechars:100 }}</p>
+                    </ul>
+                    <div class="d-flex justify-content-between">
+                        <a type="button" class="btn btn-sm btn-block btn-outline-primary" href="{% url 'blog:article_detail' article.pk %}">Посмотреть</a>
+                        <a type="button" class="btn btn-sm btn-block btn-outline-primary" href="{% url 'blog:article_update' article.pk %}">Редактировать</a>
+                        <a type="button" class="btn btn-sm btn-block btn-outline-primary" href="{% url 'blog:article_delete' article.pk %}">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

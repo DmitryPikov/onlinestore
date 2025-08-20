@@ -1,15 +1,17 @@
-{% extends 'home.html' %}
+{% extends 'catalog/home.html' %}
 {% load my_tags %}
 {% block content %}
 <div class="row text-center">
-    {% for product in products %}
+    {% for product in object_list %}
         <div class="col-3">
             <div class="card mb-4 box-shadow">
                 <div class="card-header">
                     <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
                 </div>
                 <div class="card-body">
-                    <img src="{{ product.photo | media_filter }}" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+                    {% if product.photo %}
+                        <img src="{{ product.photo | media_filter }}" class="img-fluid" style="width: 100%; height: auto; object-fit: cover;">
+                    {% endif %}
                     <h1 class="card-title pricing-card-title">{{ product.price }}</h1>
                     <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                         <p>{{ product.description|truncatechars:100 }}</p>
