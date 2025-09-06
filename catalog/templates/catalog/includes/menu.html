@@ -6,6 +6,7 @@
         <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
         {% if user.is_authenticated %}
         <a class="p-2 btn btn-outline-primary" href="{% url 'users:logout' %}">Выход</a>
+        <span class="p-2 text-primary">Вы вошли как: {{ user.email }}</span>
         {% else %}
         <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Вход</a>
         <a class="p-2 btn btn-outline-primary" href="{% url 'users:register' %}">Регистрация</a>
