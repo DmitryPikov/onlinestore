@@ -7,6 +7,8 @@ from catalog.models import Product
 
 class StyleFormMixin:
     def __init__(self, *args, **kwargs):
+        # Удаляем user из kwargs перед передачей в родительский класс
+        self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             if isinstance(field, forms.BooleanField):
@@ -27,7 +29,15 @@ class ProductForm(StyleFormMixin, ModelForm):
 
     class Meta:
         model = Product
-        fields = '__all__'
+        exclude = ('owner',)
+
+    def save(self, commit=True):
+        product = super().save(commit=False)
+        if self.user and not product.owner:
+            product.owner = self.user
+        if commit:
+            product.save()
+        return product
 
     def clean_name(self):
         name = self.cleaned_data.get('name', '').lower()
@@ -60,3 +70,9 @@ class ProductForm(StyleFormMixin, ModelForm):
             return self.cleaned_data.get('name')
         else:
             return self.cleaned_data.get('description')
+
+
+class ProductModeratorForm(StyleFormMixin, ModelForm):
+    class Meta:
+        model = Product
+        fields = ('publication_status',)
